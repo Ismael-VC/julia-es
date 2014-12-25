@@ -1,0 +1,967 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Julia Language 0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-24 16:27-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../devdocs/C.rst:7
+msgid "Developing/debugging Julia's C code"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:3
+msgid "Reporting and analyzing crashes (segfaults)"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:5
+msgid ""
+"So you managed to break Julia.  Congratulations!  Collected here are some "
+"general procedures you can undergo for common symptoms encountered when "
+"something goes awry.  Including the information from these debugging steps "
+"can greatly help the maintainers when tracking down a segfault or trying to "
+"figure out why your script is running slower than expected."
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:7
+msgid ""
+"If you've been directed to this page, find the symptom that best matches "
+"what you're experiencing and follow the instructions to generate the "
+"debugging information requested.  Table of symptoms:"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:9
+msgid "`Segfaults during bootstrap (sysimg.jl)`_"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:11
+msgid "`Segfaults when running a script`_"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:13
+msgid "`Errors during julia startup`_"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:18
+msgid "Version/Environment info"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:20
+msgid ""
+"No matter the error, we will always need to know what version of julia you "
+"are running. When julia first starts up, a header is printed out with a "
+"version number and date.  If your version is ``0.2.0`` or higher, please "
+"include the output of ``versioninfo()`` in any report you create::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:38
+msgid "Segfaults during bootstrap (sysimg.jl)"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:40
+msgid ""
+"Segfaults toward the end of the ``make`` process of building julia are a "
+"common symptom of something going wrong while julia is preparsing the corpus"
+" of code in the ``base/`` folder.  Many factors can contribute toward this "
+"process dying unexpectedly, however it is as often as not due to an error in"
+" the C-code portion of julia, and as such must typically be debugged with a "
+"debug build inside of ``gdb``.  Explicitly:"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:42
+msgid "Create a debug build of julia::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:47
+msgid ""
+"Note that this process will likely fail with the same error as a normal "
+"``make`` incantation, however this will create a debug executable that will "
+"offer ``gdb`` the debugging symbols needed to get accurate backtraces.  "
+"Next, manually run the bootstrap process inside of ``gdb``::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:52
+msgid ""
+"This will start ``gdb``, attempt to run the bootstrap process using the "
+"debug build of julia, and print out a backtrace if (when) it segfaults.  You"
+" may need to hit ``<enter>`` a few times to get the full backtrace.  Create "
+"a gist_ with the backtrace, the `version info`_, and any other pertinent "
+"information you can think of and open a new issue_ on Github with a link to "
+"the gist."
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:58
+msgid "Segfaults when running a script"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:60
+msgid ""
+"The procedure is very similar to `Segfaults during bootstrap (sysimg.jl)`_."
+"  Create a debug build of Julia, and run your script inside of a debugged "
+"julia process::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:66
+msgid ""
+"Note that ``gdb`` will sit there, waiting for instructions.  Type ``r`` to "
+"run the process, and ``bt`` to generate a backtrace once it segfaults::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:73
+msgid ""
+"Create a gist_ with the backtrace, the `version info`_, and any other "
+"pertinent information you can think of and open a new issue_ on Github with "
+"a link to the gist."
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:79
+msgid "Errors during julia startup"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:81
+msgid ""
+"Occasionally errors occur during julia's startup process (especially when "
+"using binary distributions, as opposed to compiling from source) such as the"
+" following::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:86
+msgid ""
+"These errors typically indicate something is not getting loaded properly "
+"very early on in the bootup phase, and our best bet in determining what's "
+"going wrong is to use external tools to audit the disk activity of the "
+"``julia`` process:"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:88
+msgid "On Linux, use ``strace``::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:92
+msgid "On OSX, use ``dtruss``::"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:96
+msgid ""
+"Create a gist_ with the ``strace``/ ``dtruss`` ouput, the `version info`_, "
+"and any other pertinent information and open a new issue_ on Github with a "
+"link to the gist."
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:100
+msgid "Glossary"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:102
+msgid "A few terms have been used as shorthand in this guide:"
+msgstr ""
+
+#: ../../devdocs/backtraces.rst:104
+msgid ""
+"``<julia_root>`` refers to the root directory of the julia source tree; e.g."
+" it should contain folders such as ``base``, ``deps``, ``src``, ``test``, "
+"etc....."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:6
+msgid "Base.Cartesian"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:8
+msgid ""
+"The (non-exported) Cartesian module provides macros that facilitate writing "
+"multidimensional algorithms. It is hoped that Cartesian will not, in the "
+"long term, be necessary; however, at present it is one of the few ways to "
+"write compact and performant multidimensional code."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:15
+msgid "Principles of usage"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:17
+msgid "A simple example of usage is::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:23
+msgid "which generates the following code::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:33
+msgid ""
+"In general, Cartesian allows you to write generic code that contains "
+"repetitive elements, like the nested loops in this example.  Other "
+"applications include repeated expressions (e.g., loop unwinding) or creating"
+" function calls with variable numbers of arguments without using the "
+"\"splat\" construct (``i...``)."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:40
+msgid "Basic syntax"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:42
+msgid "The (basic) syntax of ``@nloops`` is as follows:"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:44
+msgid ""
+"The first argument must be an integer (*not* a variable) specifying the "
+"number of loops."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:46
+msgid ""
+"The second argument is the symbol-prefix used for the iterator variable. "
+"Here we used ``i``, and variables ``i_1, i_2, i_3`` were generated."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:49
+msgid ""
+"The third argument specifies the range for each iterator variable. If you "
+"use a variable (symbol) here, it's taken as ``1:size(A,dim)``. More "
+"flexibly, you can use the anonymous-function expression syntax described "
+"below."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:53
+msgid ""
+"The last argument is the body of the loop. Here, that's what appears between"
+" the ``begin...end``."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:56
+msgid ""
+"There are some additional features of ``@nloops`` described in the "
+":ref:`reference section <devdoc-cartesian-reference>`."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:59
+msgid ""
+"``@nref`` follows a similar pattern, generating ``A[i_1,i_2,i_3]`` from "
+"``@nref 3 A i``. The general practice is to read from left to right, which "
+"is why ``@nloops`` is ``@nloops 3 i A expr`` (as in ``for i_2 = "
+"1:size(A,2)``, where ``i_2`` is to the left and the range is to the right) "
+"whereas ``@nref`` is ``@nref 3 A i`` (as in ``A[i_1,i_2,i_3]``, where the "
+"array comes first)."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:66
+msgid ""
+"If you're developing code with Cartesian, you may find that debugging is "
+"easier when you examine the generated code, using ``macroexpand``::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:74
+msgid "Supplying the number of expressions"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:76
+msgid ""
+"The first argument to both of these macros is the number of expressions, "
+"which must be an integer. When you're writing a function that you intend to "
+"work in multiple dimensions, this may not be something you want to hard-"
+"code.  Perhaps the most straightforward approach is to use the "
+"``@ngenerate`` macro."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:82
+msgid ""
+"Perhaps the easiest way to understand ``@ngenerate`` is to see it in action."
+"  Here's a slightly cleaned up example::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:146
+msgid ""
+"You can see that ``@ngenerate`` causes explicit versions to be generated for"
+" dimensions 1 to 4 (a setting controlled by the constant "
+"``CARTESIAN_DIMS``).  To allow arbitrary-dimensional arrays to be handled, "
+"it also generates a version in which different methods are cached in a "
+"dictionary.  If a given method has not yet been generated, it creates a "
+"version specific to that dimensionality and then stores it in the "
+"dictionary.  Creating the method is slow---it involves generating "
+"expressions and then evaluating them---but once created the function can be "
+"looked up from the cache, and is reasonably efficient (but still less "
+"efficient than the versions generated for explicit dimensionality)."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:158
+msgid "The arguments to ``@ngenerate`` are:"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:160
+msgid ""
+"The symbol of the variable that will be used for generating different "
+"versions (in the example, ``N``)"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:162
+msgid ""
+"The return type of the function (in the example, ``typeof(A)``). This is not"
+" used for the versions that are generated for specific ``N``, but is needed "
+"for the dictionary-backed version.  Julia cannot infer the return type of "
+"the function looked up from the dictionary."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:167
+msgid ""
+"The actual function declaration.  Use ``N`` as you would a normal parameter."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:172
+msgid "Anonymous-function expressions as macro arguments"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:174
+msgid ""
+"Perhaps the single most powerful feature in ``Cartesian`` is the ability to "
+"supply anonymous-function expressions that get evaluated at parsing time.  "
+"Let's consider a simple example::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:180
+msgid ""
+"``@nexprs`` generates ``n`` expressions that follow a pattern. This code "
+"would generate the following statements::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:186
+msgid ""
+"In each generated statement, an \"isolated\" ``j`` (the variable of the "
+"anonymous function) gets replaced by values in the range ``1:2``. Generally "
+"speaking, Cartesian employs a LaTeX-like syntax.  This allows you to do math"
+" on the index ``j``.  Here's an example computing the strides of an array::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:195
+msgid "would generate expressions ::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:203
+msgid "Anonymous-function expressions have many uses in practice."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:208
+msgid "Macro reference"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:211
+msgid "Macros for creating functions"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:215
+msgid "Generate versions of a function for different values of ``Nsym``."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:220
+msgid ""
+"Generate explicit versions of a function for different numbers of arguments."
+"  For example::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:225
+msgid "generates::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:232
+msgid "Macros for function bodies"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:238
+msgid ""
+"Generate ``N`` nested loops, using ``itersym`` as the prefix for the "
+"iteration variables. ``rangeexpr`` may be an anonymous-function expression, "
+"or a simple symbol ``var`` in which case the range is ``1:size(var,d)`` for "
+"dimension ``d``."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:243
+msgid ""
+"Optionally, you can provide \"pre\" and \"post\" expressions. These get "
+"executed first and last, respectively, in the body of each loop. For "
+"example, ::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:252
+msgid "would generate ::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:263
+msgid ""
+"If you want just a post-expression, supply ``nothing`` for the pre-"
+"expression. Using parenthesis and semicolons, you can supply multi-statement"
+" expressions."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:269
+msgid ""
+"Generate expressions like ``A[i_1,i_2,...]``.  ``indexexpr`` can either be "
+"an iteration-symbol prefix, or an anonymous-function expression."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:275
+msgid ""
+"Generate ``N`` expressions. ``expr`` should be an anonymous-function "
+"expression."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:280
+msgid ""
+"Generates an ``N``-tuple.  ``@ntuple 2 i`` would generate ``(i_1, i_2)``, "
+"and ``@ntuple 2 k->k+1`` would generate ``(2,3)``."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:284
+msgid ""
+"``@nall 3 d->(i_d > 1)`` would generate the expression ``(i_1 > 1 && i_2 > 1"
+" && i_3 > 1)``. This can be convenient for bounds-checking."
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:291
+msgid ""
+"Generates a sequence of ``if ... elseif ... else ... end`` statements. For "
+"example::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:295
+msgid "would generate::"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:307
+msgid "Frequently asked questions"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:311
+msgid ""
+"I got an error ``ERROR: N not defined`` when using ``@ngenerate``. Why?"
+msgstr ""
+
+#: ../../devdocs/cartesian.rst:313
+msgid ""
+"Most likely you forgot to define your function with ``N`` as a type "
+"parameter, e.g., ``@ngenerate N returntype myfunc{N}(...)``."
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:3
+msgid "gdb debugging tips"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:6
+msgid "Displaying Julia variables"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:8
+msgid ""
+"Within ``gdb``, any ``jl_value_t*`` object ``obj`` can be displayed using ::"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:13
+msgid ""
+"The object will be displayed in the julia session, not in the gdb session. "
+"This is a useful way to discover the types and values of objects being "
+"manipulated by Julia's C code."
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:17
+msgid ""
+"Similarly, if you're debugging some of julia's internals (e.g., "
+"``inference.jl``), you can print ``obj`` using ::"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:23
+msgid ""
+"This is a good way to circumvent problems that arise from the order in which"
+" julia's output streams are initialized."
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:26
+msgid "Inserting breakpoints for inspection from gdb"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:28
+msgid ""
+"In your ``gdb`` session, set a breakpoint in ``jl_breakpoint`` like so::"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:32
+msgid ""
+"Then within your Julia code, insert a call to ``jl_breakpoint`` by adding ::"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:37
+msgid "or alternatively ::"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:42
+msgid "if you want to inspect ``obj`` from within ``jl_breakpoint``."
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:44
+msgid ""
+"It's particularly helpful to back up to the ``jl_apply`` frame, from which "
+"you can display the arguments to a function using, e.g., ::"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:51
+msgid "Inserting breakpoints upon certain conditions"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:54
+msgid "Loading a particular file"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:56
+msgid "Let's say the file is ``sysimg.jl``::"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:61
+msgid "Calling a particular method"
+msgstr ""
+
+#: ../../devdocs/debuggingtips.rst:67
+msgid ""
+"Since this function is used for every call, you will make everything 1000x "
+"slower if you do this."
+msgstr ""
+
+#: ../../devdocs/julia.rst:7
+msgid "Documentation of Julia's Internals"
+msgstr ""
+
+#: ../../devdocs/meta.rst:6
+msgid "Talking to the compiler (the ``:meta`` mechanism)"
+msgstr ""
+
+#: ../../devdocs/meta.rst:8
+msgid ""
+"In some circumstances, one might wish to provide hints or instructions that "
+"a given block of code has special properties: you might always want to "
+"inline it, or you might want to turn on special compiler optimization "
+"passes.  Starting with version 0.4, julia has a convention that these "
+"instructions can be placed inside a ``:meta`` expression, which must be the "
+"first expression in the body of a function."
+msgstr ""
+
+#: ../../devdocs/meta.rst:16
+msgid ""
+"``:meta`` expressions are created with macros. As an example, consider the "
+"implementation of the ``@inline`` macro::"
+msgstr ""
+
+#: ../../devdocs/meta.rst:26
+msgid ""
+"Here, ``ex`` is expected to be an expression defining a function. A "
+"statement like this::"
+msgstr ""
+
+#: ../../devdocs/meta.rst:33
+msgid "gets turned into an expression like this::"
+msgstr ""
+
+#: ../../devdocs/meta.rst:42
+msgid ""
+"``pushmeta!(ex, :symbol, args...)`` appends ``:symbol`` to the end of the "
+"``:meta`` expression, creating a new ``:meta`` expression if necessary. If "
+"``args`` is specified, a nested expression containing ``:symbol`` and these "
+"arguments is appended instead, which can be used to specify additional "
+"information."
+msgstr ""
+
+#: ../../devdocs/meta.rst:48
+msgid ""
+"To use the metadata, you have to parse these ``:meta`` expressions. If your "
+"implementation can be performed within Julia, ``popmeta!`` is very handy: "
+"``popmeta!(body, :symbol)`` will scan a function *body* expression (one "
+"without the function signature) for a ``:meta`` expression, extract any "
+"arguments, and return a tuple ``(found::Bool, args::Array{Any})``. If the "
+"metadata did not have any arguments, or ``:symbol`` was not found, the "
+"``args`` array will be empty."
+msgstr ""
+
+#: ../../devdocs/meta.rst:56
+msgid ""
+"Not yet provided is a convenient infrastructure for parsing ``:meta`` "
+"expressions from C++."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:7
+msgid "SubArrays"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:9
+msgid ""
+"Julia's ``SubArray`` type is a container encoding a \"view\" of a parent "
+"``AbstractArray``.  This page documents some of the design principles and "
+"implementation of ``SubArray``\\s."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:14
+msgid "Indexing: cartesian vs. linear indexing"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:16
+msgid ""
+"Broadly speaking, there are two main ways to access data in an array. The "
+"first, often called cartesian indexing, uses ``N`` indexes for an ``N`` "
+"-dimensional ``AbstractArray``.  For example, a matrix ``A`` (2-dimensional)"
+" can be indexed in cartesian style as ``A[i,j]``.  The second indexing "
+"method, refered to as linear indexing, uses a single index even for higher-"
+"dimensional objects.  For example, if ``A = reshape(1:12, 3, 4)``, then the "
+"expression ``A[5]`` returns the value 5.  Julia allows you to combine these "
+"styles of indexing: for example, a 3d array ``A3`` can be indexed as "
+"``A3[i,j]``, in which case ``i`` is interpreted as a cartesian index for the"
+" first dimension, and ``j`` is a linear index over dimensions 2 and 3."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:28
+msgid ""
+"For ``Array``\\s, linear indexing appeals to the underlying storage format: "
+"an array is laid out as a contiguous block of memory, and hence the linear "
+"index is just the offset (+1) of the corresponding entry relative to the "
+"beginning of the array.  However, this is not true for many other "
+"``AbstractArray`` types: examples include ``SparseMatrixCSC``, arrays that "
+"require some kind of computation (such as interpolation), and the type under"
+" discussion here, ``SubArray``.  For these types, the underlying information"
+" is more naturally described in terms of cartesian indexes."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:38
+msgid ""
+"You can manually convert from a cartesian index to a linear index with "
+"``sub2ind``, and vice versa using ``ind2sub``.  ``getindex`` and "
+"``setindex!`` functions for ``AbstractArray`` types may include similar "
+"operations."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:43
+msgid ""
+"While converting from a cartesian index to a linear index is fast (it's just"
+" multiplication and addition), converting from a linear index to a cartesian"
+" index is very slow: it relies on the ``div`` operation, which is one of the"
+" slowest low-level operations you can perform with a CPU.  For this reason, "
+"any code that deals with ``AbstractArray`` types is best designed in terms "
+"of cartesian, rather than linear, indexing."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:52
+msgid "Index replacement"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:54
+msgid "Consider making 2d slices of a 3d array::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:59
+msgid ""
+"``slice`` drops \"singleton\" dimensions (ones that are specified by an "
+"``Int``), so both ``S1`` and ``S2`` are two-dimensional ``SubArray``\\s. "
+"Consequently, the natural way to index these is with ``S1[i,j]``.  To "
+"extract the value from the parent array ``A``, the natural approach is to "
+"replace ``S1[i,j]`` with ``A[i,5,(2:6)[j]]`` and ``S2[i,j]`` with "
+"``A[5,i,(2:6)[j]]``."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:66
+msgid ""
+"The key feature of the design of SubArrays is that this index replacement "
+"can be performed without any runtime overhead."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:70
+msgid "SubArray design"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:73
+msgid "Type parameters and fields"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:75
+msgid ""
+"The strategy adopted is first and foremost expressed in the definition of "
+"the type::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:86
+msgid ""
+"``SubArray`` has 5 type parameters.  The first two are the standard element "
+"type and dimensionality.  The next is the type of the parent "
+"``AbstractArray``.  The most heavily-used is the fourth parameter, a "
+"``tuple`` of the types of the indexes for each dimension. The final one, "
+"``LD``, is used only in special circumstances, to implement efficient linear"
+" indexing for those types that can support it."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:94
+msgid ""
+"If in our example above ``A`` is a ``Array{Float64, 3}``, our ``S1`` case "
+"above would be a "
+"``SubArray{Float64,2,Array{Float64,3},(Colon,Int64,UnitRange{Int64}),2}``. "
+"Note in particular the tuple parameter, which stores the types of the "
+"indexes used to create ``S1``.  Likewise, ::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:104
+msgid ""
+"Storing these values allows index replacement, and having the types encoded "
+"as parameters allows one to dispatch to efficient algorithms."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:107
+msgid ""
+"An ``Int`` index is used to represent a parent dimension that should be "
+"dropped.  The distinction between the ``sub`` and ``slice`` commands is that"
+" ``sub`` converts *interior* ``Int`` indices into ranges at the time of "
+"construction.  For example::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:117
+msgid "Because of this conversion, ``S3`` is three-dimensional."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:120
+msgid "``getindex`` and ``setindex!`` (index translation)"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:122
+msgid ""
+"Performing index translation requires that you do different things for "
+"different concrete ``SubArray`` types.  For example, for ``S1``, one needs "
+"to apply the ``i,j`` indexes to the first and third dimensions of the parent"
+" array, whereas for ``S2`` one needs to apply them to the second and third."
+"  The simplest approach to indexing would be to do the type-analysis at "
+"runtime::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:143
+msgid ""
+"Unfortunately, this would be disastrous in terms of performance: each "
+"element access would allocate memory, and involves the running of a lot of "
+"poorly-typed code."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:147
+msgid ""
+"The better approach is to dispatch to specific methods to handle each type "
+"of input.  Note, however, that the number of distinct methods needed grows "
+"exponentially in the number of dimensions, and since Julia supports arrays "
+"of any dimension the number of methods required is in fact infinite.  "
+"Fortunately, ``stagedfunction``\\s allow one to generate the necessary "
+"methods quite straightforwardly.  The resulting code looks quite a lot like "
+"the runtime approach above, but all of the type analysis is performed at the"
+" time of method instantiation.  For a ``SubArray`` of the type of ``S1``, "
+"the method executed at runtime is literally ::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:161
+msgid "Linear indexing"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:163
+msgid ""
+"Linear indexing can be implemented efficiently when the entire array has a "
+"single stride that separates successive elements.  For ``SubArray`` types, "
+"the availability of efficient linear indexing is based purely on the types "
+"of the indexes, and does not depend on values like the size of the array.  "
+"It therefore can miss some cases in which the stride happens to be uniform::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:183
+msgid ""
+"A view constructed as ``sub(A, 2:2:4, :)`` happens to have uniform stride, "
+"and therefore linear indexing indeed could be performed efficiently.  "
+"However, success in this case depends on the size of the array: if the first"
+" dimension instead were odd, ::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:202
+msgid ""
+"then ``A[2:2:4,:]`` does not have uniform stride, so we cannot guarantee "
+"efficient linear indexing.  Since we have to base this decision based purely"
+" on types encoded in the parameters of the ``SubArray``, ``S = sub(A, 2:2:4,"
+" :)`` cannot implement efficient linear indexing."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:208
+msgid ""
+"The last parameter of ``SubArray``, ``LD``, encodes the highest dimension up"
+" to which elements are guaranteed to have uniform stride. When ``LD == "
+"length(I)``, the length of the ``indexes`` tuple, efficient linear indexing "
+"becomes possible."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:213
+msgid "An example might help clarify what this means:"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:215
+msgid ""
+"For ``S1`` above, the ``Colon`` along the first dimension is uniformly "
+"spaced (all elements are displaced by 1 from the previous value), so this "
+"dimension does not \"break\" linear indexing. Consequently ``LD`` has a "
+"value of at least 1."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:220
+msgid ""
+"The second dimension of the parent, sliced out as ``5``, does not not by "
+"itself break linear indexing:  if all of the remaining indexes were ``Int``,"
+" the entire ``SubArray`` would have efficient linear indexing.  "
+"Consequently, ``LD`` is at least 2."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:225
+msgid ""
+"The last dimension is a ``Range``.  This would by itself break linear "
+"indexing (even though it is a ``UnitRange``, the fact that it might not "
+"start at 1 means that there might be gaps).  Additionally, given the "
+"preceeding indexes any choice other than ``Int`` would also have truncated "
+"``LD`` at 2."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:231
+msgid ""
+"Consequently, as a whole ``S1`` does not have efficient linear indexing."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:234
+msgid ""
+"However, if we were to later say ``S1a = slice(S1, 2:2:7, 3)``, ``S1a`` "
+"would have an ``LD`` of 3 (its indexes tuple has type ``(Colon, Int, Int)``)"
+" and would have efficient linear indexing.  This ability to re-slice is the "
+"main motivation to use an integer ``LD`` rather than a boolean flag to "
+"encode the applicability of linear indexing."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:241
+msgid ""
+"The main reason ``LD`` cannot always be inferred from the ``indexes`` tuple "
+"is because ``sub`` converts internal ``Int`` indexes into ``UnitRange``\\s."
+"  Consequently it is important to encode \"safe\" dimensions of size 1 prior"
+" to conversion.  Up to the ``LDth`` entry, we can be sure that any "
+"``UnitRange`` was, in fact, an ``Integer`` prior to conversion."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:250
+msgid "A few details"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:252
+msgid ""
+"Hopefully by now it's fairly clear that supporting slices means that the "
+"dimensionality, given by the parameter ``N``, is not necessarily equal to "
+"the dimensionality of the parent array or the length of the ``indexes`` "
+"tuple.  Neither do user-supplied indexes necessarily line up with entries in"
+" the ``indexes`` tuple (e.g., the second user-supplied index might "
+"correspond to the third dimension of the parent array, and the third element"
+" in the ``indexes`` tuple)."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:260
+msgid ""
+"What might be less obvious is that the dimensionality of the parent array "
+"may not be equal to the length of the ``indexes`` tuple.  Some examples::"
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:269
+msgid ""
+"Consequently, internal ``SubArray`` code needs to be fairly careful about "
+"which of these three notions of dimensionality is relevant in each "
+"circumstance."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:273
+msgid ""
+"Because the processing needed to implement all of the stagedfunction "
+"expressions isn't readily available at the time ``subarray.jl`` appears in "
+"the bootstrap process, ``SubArray`` functionality is split into two files, "
+"the second being ``subarray2.jl``."
+msgstr ""
+
+#: ../../devdocs/subarrays.rst:278
+msgid ""
+"Bounds-checking has currently not been tackled. There are two relevant "
+"notions of bounds-checking, one at construction time and one during element "
+"access.  This is an important outstanding issue."
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:3
+msgid "System Image Building"
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:6
+msgid "Building the Julia system image"
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:8
+msgid ""
+"Julia ships with a preparsed system image containing the contents of the "
+"``Base`` module, named ``sys.ji``.  This file is also precompiled into a "
+"shared library called ``sys.{so,dll,dylib}`` on as many platforms as "
+"possible, so as to give vastly improved startup times.  On systems that do "
+"not ship with a precompiled system image file, one can be generated from the"
+" source files shipped in Julia's ``DATAROOTDIR/julia/base`` folder."
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:10
+msgid "This operation is useful for multiple reasons.  A user may:"
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:12
+msgid ""
+"Build a precompiled shared library system image on a platform that did not "
+"ship with one, thereby improving startup times."
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:14
+msgid ""
+"Modify ``Base``, rebuild the system image and use the new ``Base`` next time"
+" Julia is started."
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:16
+msgid ""
+"Include a ``userimg.jl`` file that includes packages into the system image, "
+"thereby creating a system image that has packages embedded into the startup "
+"environment."
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:18
+msgid ""
+"Julia now ships with a script that automates the tasks of building the "
+"system image, wittingly named ``build_sysimg.jl`` that lives in "
+"``DATAROOTDIR/julia/``.  That is, to include it into a current Julia "
+"session, type: ::"
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:23
+msgid "This will include a ``build_sysimg()`` function:"
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:27
+msgid ""
+"Rebuild the system image. Store it in ``sysimg_path``, which defaults to a "
+"file named ``sys.ji`` that sits in the same folder as "
+"``libjulia.{so,dll,dylib}``. Use the cpu instruction set given by "
+"``cpu_target``.  Valid CPU targets are the same as for the ``-C`` option to "
+"``julia``, or the ``-march`` option to ``gcc``.  Defaults to ``native``, "
+"which means to use all CPU instructions available on the current processor. "
+"Include the user image file given by ``userimg_path``, which should contain "
+"directives such as ``using MyPackage`` to include that package in the new "
+"system image. New system image will not replace an older image unless "
+"``force`` is set to true."
+msgstr ""
+
+#: ../../devdocs/sysimg.rst:32
+msgid ""
+"Note that this file can also be run as a script itself, with command line "
+"arguments taking the place of arguments passed to the ``build_sysimg`` "
+"function.  For example, to build a system image in "
+"``/tmp/sys.{so,dll,dylib}``, with the ``core2`` CPU instruction set, a user "
+"image of ``~/userimg.jl`` and ``force`` set to ``true``, one would execute: "
+"::"
+msgstr ""
